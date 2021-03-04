@@ -86,7 +86,7 @@ echo "quit" >> $tempfile
 echo "Synchronizing: Found $count files in local folder to upload."
 # Main command to use batch file with SFTP shell script
 
-sftp -i $identity_file -b $tempfile "$user@$remote_server"  
+sftp -o StrictHostKeyChecking=No -i $identity_file -b $tempfile "$user@$remote_server" 
 echo "Done. All files synchronized with $remote_server"
 # Create/modify timestamp file
 touch $timestamp  
