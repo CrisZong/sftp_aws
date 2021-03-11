@@ -24,10 +24,10 @@ def sftp_bash():
 def drop_in_file():
     today = datetime.date.today()
     prevday = today - datetime.timedelta(days=1)
-    date_val = request.args.get('date') or prevday.strftime('%-m/%-d')
+    date_val = request.args.get('date') or prevday
     try:
-        date_val = datetime.datetime.strptime(date_val,"%m/%d").strftime("%-m/%-d")
-        name_pattern = datetime.datetime.strptime(date_val,"%m/%d").strftime("%b%-d")
+        date_val = datetime.datetime.strptime(date_val,"%m/%d%/y").strftime('%-m/%-d/%-y')
+        name_pattern = datetime.datetime.strptime(date_val,"%m/%d/%y").strftime("%b%-d")
         saved_path = 'data/WW_%s.csv'%(name_pattern)
         r = requests.post('https://4jzevgh86d.execute-api.us-east-1.amazonaws.com/default/traceAPI',
                         data='{"password": "Open, sesame","date":"%s","mode":"drop"}'%date_val,
